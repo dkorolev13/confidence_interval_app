@@ -9,14 +9,20 @@
 </head>
 <body>
     <h2>Выбери corrServerProcessorLog.txt за нужную дату</h2>
-
-    <form action="" method="POST" enctype="multipart/form-data">
+    <div>
+        <form action="" method="POST" enctype="multipart/form-data">
         <input type="file" name="document">
-        <button type="submit">Посчитать доверительный интервал</button>
+        <button type="submit">Посчитать</button>
         {% csrf_token %}
     </form>
+    </div>
 
-    Mean + 2 * Std = {{ data }}
+    <div>
+        Mean + 2 * Std = {{ data }}
+    </div>
 
+    <div>
+        Кол-во срабатываний: {{ counter }}
+    </div>
 </body>
 </html>

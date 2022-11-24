@@ -3,7 +3,8 @@ import pandas as pd
 
 
 def index(request):
-    content = {'data': '...'}
+    content = {'data': '...',
+               'counter': '...'}
     if request.method == 'POST':
 
         if 'document' in request.FILES:
@@ -14,10 +15,11 @@ def index(request):
             data_tmp = data[[36, 41, 42]]
             mean = data_tmp[(data_tmp[41] == 'FollowingMode') & (data_tmp[42] == 'success')][36].mean()
             std = data_tmp[(data_tmp[41] == 'FollowingMode') & (data_tmp[42] == 'success')][36].std()
-
             ans = round(mean + 2 * std, 2)
-            content = {'data': ans}
+            content = {'data': ans,
+                       'counter': len(data_tmp[(data_tmp[41] == 'FollowingMode') & (data_tmp[42] == 'success')])}
         else:
-            content = {'data': '...'}
+            content = {'data': '...',
+                       'counter': '...'}
 
     return render(request, 'confidence_interval_app/index.html', content)
