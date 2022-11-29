@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import pandas as pd
 
 
@@ -20,6 +20,12 @@ def index(request):
                            'counter': len(data_tmp[(data_tmp[41] == 'FollowingMode') & (data_tmp[42] == 'success')])}
 
             except pd.errors.ParserError:
+                content = {'data': 'Неверный формат log файла',
+                           'counter': 'Неверный формат log файла'}
+            except KeyError:
+                content = {'data': 'Неверный формат log файла',
+                           'counter': 'Неверный формат log файла'}
+            except UnicodeDecodeError:
                 content = {'data': 'Неверный формат log файла',
                            'counter': 'Неверный формат log файла'}
 
