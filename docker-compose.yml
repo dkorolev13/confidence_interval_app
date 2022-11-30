@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.9'
 
 services:
   django_gunicorn:
@@ -6,17 +6,16 @@ services:
       - static:/static
     env_file:
       - .env
-    build:
-      context: .
-    ports:
-      - 8000:8000
+    build: .
+    expose:
+      - 8000
 
-  ngnix:
+  nginx:
     build: ./nginx
     volumes:
       - static:/static
     ports:
-      - 8000:80
+      - "80:80"
     depends_on:
       - django_gunicorn
 
